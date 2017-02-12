@@ -5,15 +5,17 @@
             "type": "chrome",
             "request": "launch",
             "name": "Launch Chrome",
-            "webRoot": "${workspaceRoot}/src",
-            "file": "${workspaceRoot}/src/pages/index.html"
+            "webRoot": "${workspaceRoot}",
+            "file": "${workspaceRoot}/src/pages/index.html",
+            "sourceMaps": true
         },
         {
             "type": "chrome",
             "request": "launch",
             "name": "Launch Chrome against localhost",
-            "url": "http://localhost:8080",
-            "webRoot": "${workspaceRoot}"
+            "url": "http://localhost:8080/src/pages/index.html",
+            "webRoot": "${workspaceRoot}",
+            "sourceMaps": true
         },
         {
             "type": "chrome",

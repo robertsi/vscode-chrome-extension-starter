@@ -1,9 +1,11 @@
-function component () {
-  var element = document.createElement('div');
+import $ from 'jquery';
 
-  element.innerHTML = "Hello Webpack2!";
+$(document).ready(function()
+{
+  $("#app").html = "<h1>Hi Webpack & jquery2!</h1>";
+})
 
-  return element;
+if (module.hot) 
+{
+		module.hot.accept();
 }
-
-document.body.appendChild(component());

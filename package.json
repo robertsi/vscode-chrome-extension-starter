@@ -2,7 +2,7 @@
   "name": "vscode-webpack-starter",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "dev-server.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/robertsi/vscode-webpack-starter.git"
@@ -10,7 +10,8 @@
   "scripts": {
     "build": "rimraf dist && webpack",
     "watch": "webpack -w",
-    "dev": "rimraf dist && node dev-server.js",
+    "dev": "node dev-server.js",
+    "dev-server": "webpack-dev-server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Robert",
@@ -18,7 +19,7 @@
   "devDependencies": {
     "rimraf": "^2.5.4",
     "webpack": "^2.2.1",
-    "webpack-dev-server": "^2.3.0"
+    "webpack-dev-server": "^2.2.1"
   },
   "dependencies": {
     "jquery": "^3.1.1"

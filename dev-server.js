@@ -12,7 +12,7 @@ var server = new WebpackDevServer(compiler, {
 	stats: {
 		colors: true
 	},
-	contentBase: "www",
+	contentBase: "dist",
 	historyApiFallback: true,
 	 watchOptions: {
         aggregateTimeout: 300,

@@ -1,0 +1,29 @@
+{
+	// See https://go.microsoft.com/fwlink/?LinkId=733558
+	// for the documentation about the tasks.json format
+	"version": "0.1.0",
+	"tasks": [{
+			"taskName": "hi",
+			"command": "echo",
+			"isShellCommand": true,
+			"args": [
+				"Hello World"
+			],
+			"showOutput": "always", //always, never, silent
+			"echoCommand": true,
+			"suppressTaskName": false
+		},
+		{
+			"taskName": "eslint",
+			"command": "node_modules\\.bin\\eslint",
+			"isShellCommand": true,
+			"suppressTaskName": false,
+			"args": [
+				"."
+			],
+			"problemMatcher": [
+				"$eslint-stylish"
+			]
+		}
+	]
+}

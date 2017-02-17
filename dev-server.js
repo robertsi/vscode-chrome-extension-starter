@@ -1,7 +1,7 @@
-var WebpackDevServer = require('webpack-dev-server');
-var webpack = require('webpack');
-var config = require('./webpack.config.js');
-var path = require('path');
+var WebpackDevServer = require("webpack-dev-server");
+var webpack = require("webpack");
+var config = require("./webpack.config.js");
+var path = require("path");
 
 var compiler = webpack(config);
 var server = new WebpackDevServer(compiler, {
@@ -14,9 +14,9 @@ var server = new WebpackDevServer(compiler, {
 	},
 	contentBase: "dist",
 	historyApiFallback: true,
-	 watchOptions: {
-        aggregateTimeout: 300,
-        poll: 1000
-    },
+	watchOptions: {
+		aggregateTimeout: 300,
+		poll: 1000
+	},
 });
-server.listen(8080, 'localhost', function() {});
+server.listen(8080, "localhost", function () {});

@@ -1,0 +1,6 @@
+{
+	"globals": {
+		"PRODUCTION": false,
+		"DEVELOPMENT": false
+	}
+}

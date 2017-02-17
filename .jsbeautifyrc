@@ -1,0 +1,20 @@
+{
+	"indent_size": 1,
+	"indent_char": "\t",
+	"eol": "\r\n",
+	"tab_size": 4,
+	"indentwith_tabs (inverted)_": true,
+	"wrap_line_length": 120, //html.format.wrapLineLength
+	"unformatted": [
+		"a", "abbr", "acronym", "b", "bdo", "big", "br", "button", "cite", "code", "dfn", "em", "i", "img", "input", "kbd",
+		"label", "map", "object", "q", "samp", "select", "small", "span", "strong", "sub", "sup", "textarea", "tt", "var"
+	], //html.format.unformatted
+	"indent_inner_html": false, //html.format.indentInnerHtml
+	"preserve_newlines": true, //html.format.preserveNewLines
+	"max_preserve_newlines": 9007199254740991, //html.format.maxPreserveNewLines, null=Number.MAX_SAFE_INTEGER
+	"indent_handlebars": false, //html.format.indentHandlebars
+	"end_with_newline": false, //html.format.endWithNewline
+	"extra_liners": ["head", "body", "/html"], //html.format.extraLiners
+	"space_after_anon_function": true, //javascript.format.insertSpaceAfterFunctionKeywordForAnonymousFunctions
+	"space_in_paren": false //javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis
+}

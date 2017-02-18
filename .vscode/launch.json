@@ -3,25 +3,59 @@
 	"configurations": [{
 			"type": "chrome",
 			"request": "launch",
-			"name": "Launch Chrome",
-			"webRoot": "${workspaceRoot}",
-			"file": "${workspaceRoot}/src/pages/index.html",
-			"sourceMaps": true
+			"name": "Launch Chrome against filesystem",
+			"webRoot": "${workspaceRoot}/dist",
+			"file": "${workspaceRoot}/dist/index.html",
+			"sourceMaps": true,
+			"diagnosticLogging": false,
+			"sourceMapPathOverrides": {
+				"webpack:///./*": "${workspaceRoot}/src/*",
+				"webpack:///../~/*": "${workspaceRoot}/node_modules/*",
+				"webpack:///*": "/*"
+
+			}
 		},
 		{
 			"type": "chrome",
 			"request": "launch",
-			"name": "Launch Chrome against localhost",
-			"url": "http://localhost:8080/src/pages/index.html",
-			"webRoot": "${workspaceRoot}",
-			"sourceMaps": true
+			"name": "Launch Chrome against localhost:8080 - DEV",
+			"url": "http://localhost:8080/index.html",
+			"webRoot": "${workspaceRoot}/dist",
+			"sourceMaps": true,
+			"sourceMapPathOverrides": {
+				"webpack:///./*": "${workspaceRoot}/src/*",
+				"webpack:///../~/*": "${workspaceRoot}/node_modules/*",
+				"webpack:///*": "/*"
+
+			}
+		},
+		{
+			"type": "chrome",
+			"request": "launch",
+			"name": "Launch Chrome against localhost:3000 - PROD",
+			"url": "http://localhost:3000/index.html",
+			"webRoot": "${workspaceRoot}/dist",
+			"sourceMaps": true,
+			"sourceMapPathOverrides": {
+				"webpack:///./*": "${workspaceRoot}/src/*",
+				"webpack:///../~/*": "${workspaceRoot}/node_modules/*",
+				"webpack:///*": "/*"
+
+			}
 		},
 		{
 			"type": "chrome",
 			"request": "attach",
 			"name": "Attach to Chrome",
 			"port": 9222,
-			"webRoot": "${workspaceRoot}"
+			"webRoot": "${workspaceRoot}/dist",
+			"sourceMaps": true,
+			"sourceMapPathOverrides": {
+				"webpack:///./*": "${workspaceRoot}/src/*",
+				"webpack:///../~/*": "${workspaceRoot}/node_modules/*",
+				"webpack:///*": "/*"
+			}
+
 		}
 	]
 }

@@ -1,6 +1,7 @@
 const path = require("path");
 const webpack = require("webpack");
 const copyWebpackPlugin = require("copy-webpack-plugin");
+const HTMLWebpackPlugin = require("html-webpack-plugin");
 
 const DEVELOPMENT = process.env.NODE_ENV === "development";
 const PRODUCTION = process.env.NODE_ENV === "production";
@@ -15,18 +16,26 @@ const plugins = DEVELOPMENT ? [
 	new webpack.HotModuleReplacementPlugin(),
 	// enable HMR globally
 	new webpack.NamedModulesPlugin(),
-	// prints more readable module names in the browser console on HMR updates
-] : [];
+	// prints more readable module names in the browser console on HMR updates,
+	new copyWebpackPlugin([{
+		from: "index.html",
+		to: "index.html"
+	}])
+] : [
+	new webpack.optimize.UglifyJsPlugin({
+		sourceMap: true
+	}),
+	new HTMLWebpackPlugin({
+		template: "index-template.html"
+	})
+];
 
 plugins.push(
 	new webpack.DefinePlugin({
 		"PRODUCTION": JSON.stringify(PRODUCTION),
 		"DEVELOPMENT": JSON.stringify(DEVELOPMENT)
-	}),
-	new copyWebpackPlugin([{
-		from: "index.html",
-		to: "index.html"
-	}]));
+	})
+);
 
 module.exports = {
 	devtool: "source-map",
@@ -35,13 +44,13 @@ module.exports = {
 	output: {
 		path: path.resolve(__dirname, "dist"),
 		//path: path.join(__dirname, "dist"),
-		filename: "[name].bundle.js",
-		chunkFilename: "[id].chunk.js",
-		publicPath: "/"
+		filename: PRODUCTION ? "[name].bundle.[hash:12].min.js" : "[name].bundle.js",
+		//chunkFilename: "[id].chunk.js",
+		publicPath: ""
 	},
-	plugins: plugins
-	/* externals: {
-	     jquery: "jQuery" //jquery is external and available at the global variable jQuery
-	 },*/
+	plugins: plugins,
+	externals: {
+		jquery: "jQuery" //jquery is external and available at the global variable jQuery
+	}
 
 };

@@ -1,32 +1,31 @@
 {
 	"version": "0.2.0",
-	"configurations": [{
+	"configurations": [
+		{
 			"type": "chrome",
 			"request": "launch",
 			"name": "Launch Chrome against filesystem",
 			"webRoot": "${workspaceRoot}/dist",
-			"file": "${workspaceRoot}/dist/index.html",
+			"file": "${workspaceRoot}/dist/page_action.html",
 			"sourceMaps": true,
 			"diagnosticLogging": false,
 			"sourceMapPathOverrides": {
 				"webpack:///./*": "${workspaceRoot}/src/*",
 				"webpack:///../~/*": "${workspaceRoot}/node_modules/*",
 				"webpack:///*": "/*"
-
 			}
 		},
 		{
 			"type": "chrome",
 			"request": "launch",
-			"name": "Launch Chrome against localhost:8080 - DEV",
-			"url": "http://localhost:8080/index.html",
+			"name": "Launch Chrome against chrom extension",
+			"url": "chrome-extension://olifenopjhamlcheijmjgceneceekknj/index.html",
 			"webRoot": "${workspaceRoot}/dist",
 			"sourceMaps": true,
 			"sourceMapPathOverrides": {
 				"webpack:///./*": "${workspaceRoot}/src/*",
 				"webpack:///../~/*": "${workspaceRoot}/node_modules/*",
 				"webpack:///*": "/*"
-
 			}
 		},
 		{
@@ -40,7 +39,6 @@
 				"webpack:///./*": "${workspaceRoot}/src/*",
 				"webpack:///../~/*": "${workspaceRoot}/node_modules/*",
 				"webpack:///*": "/*"
-
 			}
 		},
 		{
@@ -55,7 +53,6 @@
 				"webpack:///../~/*": "${workspaceRoot}/node_modules/*",
 				"webpack:///*": "/*"
 			}
-
 		}
 	]
 }

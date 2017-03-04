@@ -1,11 +1,12 @@
 {
 	"manifest_version": 2,
-
 	"name": "Google Chrome Extension starter",
 	"description": "Google Chrome Extension webpack starter for Visual Studio Code",
 	"version": "1.0",
 	"background": {
-		"scripts": ["background.bundle.min.js"],
+		"scripts": [
+			"background.bundle.min.js"
+		],
 		"persistent": false
 	},
 	"page_action": {
@@ -13,7 +14,21 @@
 		"default_title": "Click here for page action!",
 		"default_popup": "page_action.html"
 	},
+	"content_scripts": [
+		{
+			"matches": [
+				"http://*/*",
+				"https://*/*"
+			],
+			"js": [
+				"contentScript.bundle.min.js"
+			]
+		}
+	],
 	"permissions": [
-		"activeTab", "declarativeContent"
+		"activeTab",
+		"declarativeContent",
+		"http://*/*",
+		"https://*/*"
 	]
 }

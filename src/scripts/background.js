@@ -1,5 +1,5 @@
 "use strict";
-import thenChrome from "then-chrome";
+//import thenChrome from "then-chrome";
 // Copyright (c) 2011 The Chromium Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -31,7 +31,7 @@ function onMessage(message, sender, sendResponse)
 {
 	alert(message);
 	chrome.pageAction.show(sender.tab.id);
-	sendResponse("google was found");
+	sendResponse("google was found20");
 }
 
 

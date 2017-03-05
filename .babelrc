@@ -1,0 +1,16 @@
+{
+	"presets": [
+		[
+			"env",
+			{
+				"targets": {
+					"chrome": 56,
+					"targets.uglify" : false
+				},
+				"modules": false, //needed for tree-shaking unused code
+				"useBuiltIns": false,
+				"debug": false
+			}
+		]
+	]
+}

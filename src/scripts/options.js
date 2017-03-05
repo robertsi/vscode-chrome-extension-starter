@@ -1,9 +1,23 @@
 "use strict";
 import $ from "jquery";
 
+
+
 function awesome() {
-	// Do something awesome!
-	alert("This is awesome browser action3!");
+	//alert("Hi from options page");
+	//https://bugs.chromium.org/p/chromium/issues/detail?id=476350
+	chrome.extension.getBackgroundPage().alert("Hi from options page1554");
+	let nums = [2, 3, 5, 8, 10, 13, 15, 20];
+
+
+	// Statement bodies
+	nums.forEach(v => {
+		if (v % 5 === 0)
+			console.log(v);
+	});
+
+
+
 }
 
 function totallyAwesome() {
@@ -39,6 +53,13 @@ function DOMContentLoaded() {
 	main();
 }
 
+
 //var jq = $.noConflict();
 //jQuery(document).ready(DOMContentLoaded);
 $(document).ready(DOMContentLoaded);
+
+if (DEVELOPMENT) {
+	if (module.hot) {
+		module.hot.accept();
+	}
+}

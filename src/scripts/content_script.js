@@ -1,5 +1,6 @@
 "use strict";
-var regex = /Naslovnica/;
+let regex = /Naslovnica/;
+
 //var regex = new RegExp("google");
 
 

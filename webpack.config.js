@@ -6,29 +6,34 @@ const HTMLWebpackPlugin = require("html-webpack-plugin");
 const DEVELOPMENT = process.env.NODE_ENV === "development";
 const PRODUCTION = process.env.NODE_ENV === "production";
 
+/*const entry = {
+	background: ["./scripts/background.js"],
+	pageAction: ["./scripts/page_action.js"],
+	options: ["./scripts/options.js"],
+	contentScript: ["./scripts/content_script.js"]
+};*/
 const entry = PRODUCTION ? {
 	background: ["./scripts/background.js"],
 	pageAction: ["./scripts/page_action.js"],
-	browserAction: ["./scripts/browser_action.js"],
+	options: ["./scripts/options.js"],
 	contentScript: ["./scripts/content_script.js"]
 } : {
-	background: ["./scripts/background.js", "webpack/hot/dev-server",
-		"webpack-dev-server/client?http://localhost:8080"
-	],
-	pageAction: ["./scripts/page_action.js", "webpack/hot/dev-server",
-		"webpack-dev-server/client?http://localhost:8080"
-	],
-	browserAction: ["./scripts/browser_action.js", "webpack/hot/dev-server",
-		"webpack-dev-server/client?http://localhost:8080"
-	],
-	contentScript: ["./scripts/content_script.js", "webpack/hot/dev-server",
-		"webpack-dev-server/client?http://localhost:8080"
-	],
-};
+		background: ["./scripts/background.js", "webpack/hot/dev-server",
+			"webpack-dev-server/client?http://localhost:8080"
+		],
+		pageAction: ["./scripts/page_action.js", "webpack/hot/dev-server",
+			"webpack-dev-server/client?http://localhost:8080"
+		],
+		options: ["./scripts/options.js", "webpack/hot/dev-server",
+			"webpack-dev-server/client?http://localhost:8080"
+		],
+		contentScript: ["./scripts/content_script.js", "webpack/hot/dev-server",
+			"webpack-dev-server/client?http://localhost:8080"
+		],
+	};
 const plugins = DEVELOPMENT ? [
-
 	new webpack.HotModuleReplacementPlugin(),
-	// enable HMR globally
+	// enable HMR globally,
 	new webpack.NamedModulesPlugin(),
 	// prints more readable module names in the browser console on HMR updates,
 	new copyWebpackPlugin([{
@@ -37,15 +42,15 @@ const plugins = DEVELOPMENT ? [
 	}
 	]),
 ] :
-[
-	new webpack.optimize.UglifyJsPlugin({
-		sourceMap: true
-	}),
-	new copyWebpackPlugin([{
-		from: "./resources/manifest/manifest-prod.json",
-		to: "manifest.json"
-	}])
-];
+	[
+		new webpack.optimize.UglifyJsPlugin({
+			sourceMap: true
+		}),
+		new copyWebpackPlugin([{
+			from: "./resources/manifest/manifest-prod.json",
+			to: "manifest.json"
+		}])
+	];
 
 plugins.push(
 	new webpack.DefinePlugin({
@@ -63,9 +68,9 @@ plugins.push(
 		chunks: ["pageAction"]
 	}),
 	new HTMLWebpackPlugin({
-		filename: "browser_action.html",
-		template: "./resources/pages/browser_action.html",
-		chunks: ["browserAction"]
+		filename: "options.html",
+		template: "./resources/pages/options.html",
+		chunks: ["options"]
 	})
 );
 
@@ -85,5 +90,10 @@ module.exports = {
 		alias: {
 			jquery: PRODUCTION ? "jquery/dist/jquery.min" : "jquery/src/jquery"
 		}
+	},
+	module: {
+		rules: [
+			{ test: /\.js$/, exclude: /node_modules/, loader: "babel-loader" }
+		]
 	}
 };

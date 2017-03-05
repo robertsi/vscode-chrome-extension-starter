@@ -6,6 +6,7 @@ var config = require("./webpack.config.js");
 var compiler = webpack(config);
 var server = new WebpackDevServer(compiler, {
 	hot: true,
+	https: true,
 	inline: true,
 	filename: config.output.filename,
 	publicPath: config.output.publicPath,

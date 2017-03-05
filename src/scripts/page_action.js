@@ -1,9 +1,8 @@
-"use strict";
 import $ from "jquery";
 
 function awesome() {
 	// Do something awesome!
-	alert("This is awesome page action!");
+	alert("This is my awesome page action!");
 }
 
 function totallyAwesome() {
@@ -42,3 +41,14 @@ function DOMContentLoaded() {
 //var jq = $.noConflict();
 //jQuery(document).ready(DOMContentLoaded);
 $(document).ready(DOMContentLoaded);
+
+if (DEVELOPMENT) {
+	if (module.hot) {
+		module.hot.dispose(() => {
+			$("button").off("click");
+			//$("button").off(clickHandler);
+		}); //we need to remove side effects
+
+		module.hot.accept();
+	}
+}

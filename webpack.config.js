@@ -19,16 +19,16 @@ const entry = PRODUCTION ? {
 	contentScript: ["./scripts/content_script.js"]
 } : {
 		background: ["./scripts/background.js", "webpack/hot/dev-server",
-			"webpack-dev-server/client?http://localhost:8080"
+			"webpack-dev-server/client?https://localhost:8080"
 		],
 		pageAction: ["./scripts/page_action.js", "webpack/hot/dev-server",
-			"webpack-dev-server/client?http://localhost:8080"
+			"webpack-dev-server/client?https://localhost:8080"
 		],
 		options: ["./scripts/options.js", "webpack/hot/dev-server",
-			"webpack-dev-server/client?http://localhost:8080"
+			"webpack-dev-server/client?https://localhost:8080"
 		],
 		contentScript: ["./scripts/content_script.js", "webpack/hot/dev-server",
-			"webpack-dev-server/client?http://localhost:8080"
+			"webpack-dev-server/client?https://localhost:8080"
 		],
 	};
 const plugins = DEVELOPMENT ? [
@@ -70,7 +70,14 @@ plugins.push(
 	new HTMLWebpackPlugin({
 		filename: "options.html",
 		template: "./resources/pages/options.html",
-		chunks: ["options"]
+		chunks: ["options"],
+		//inject: false
+	}),
+	new HTMLWebpackPlugin({
+		filename: "background.html",
+		template: "./resources/pages/background.html",
+		chunks: ["background"],
+		//inject: false
 	})
 );
 
@@ -83,7 +90,7 @@ module.exports = {
 		//path: path.join(__dirname, "dist"),
 		filename: PRODUCTION ? "[name].bundle.min.js" : "[name].bundle.js",
 		//chunkFilename: "[id].chunk.js",
-		publicPath: ""
+		publicPath: PRODUCTION ? "" : "https://localhost:8080/"
 	},
 	plugins: plugins,
 	resolve: {

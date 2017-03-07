@@ -20,8 +20,9 @@
 	},
 	"permissions": [
 		"activeTab",
+		"contextMenus",
 		"declarativeContent",
 		"tabs",
-		"http://www.24ur.com/*"
+		"https://github.com/robertsi/vscode-chrome-extension-starter/*"
 	]
 }

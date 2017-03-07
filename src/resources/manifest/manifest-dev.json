@@ -18,10 +18,11 @@
 	},
 	"permissions": [
 		"activeTab",
+		"contextMenus",
 		"declarativeContent",
 		"tabs",
 		"https://localhost:8080/*",
-		"http://www.24ur.com/*"
+		"https://github.com/robertsi/vscode-chrome-extension-starter/*"
 	],
 	"content_security_policy": "script-src 'self' https://localhost:8080;"
 }

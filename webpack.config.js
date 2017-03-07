@@ -27,9 +27,7 @@ const entry = PRODUCTION ? {
 		options: ["./scripts/options.js", "webpack/hot/dev-server",
 			"webpack-dev-server/client?https://localhost:8080"
 		],
-		contentScript: ["./scripts/content_script.js", "webpack/hot/dev-server",
-			"webpack-dev-server/client?https://localhost:8080"
-		],
+		contentScript: ["./scripts/content_script.js"],
 	};
 const plugins = DEVELOPMENT ? [
 	new webpack.HotModuleReplacementPlugin(),
@@ -89,7 +87,7 @@ module.exports = {
 		path: path.resolve(__dirname, "dist"),
 		//path: path.join(__dirname, "dist"),
 		filename: PRODUCTION ? "[name].bundle.min.js" : "[name].bundle.js",
-		//chunkFilename: "[id].chunk.js",
+		chunkFilename: "[id].chunk.js",
 		publicPath: PRODUCTION ? "" : "https://localhost:8080/"
 	},
 	plugins: plugins,

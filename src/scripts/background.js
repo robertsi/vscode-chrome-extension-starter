@@ -25,46 +25,77 @@
 	});
 });*/
 
+
+
+
 //thenChrome.runtime.onMessage().then
 function onMessage(message, sender, sendResponse) {
 	alert(message);
 	chrome.pageAction.show(sender.tab.id);
-	sendResponse("something was found34fsdfdsadf!!!!!!");
+	sendResponse("Background script sent a response!!!!!!");
+}
+
+function injectScript(tabId) {
+	chrome.tabs.executeScript(
+		tabId,
+		{
+			code: `
+			console.log("Checking if script is injected");
+			var injected = window.IsContentScriptInjected;
+      		window.IsContentScriptInjected = true;
+			console.log(injected);
+      		injected;`,
+			runAt: "document_start",
+		},
+		(result) => {
+
+			const isInjected = result[0];
+			if (isInjected == null || isInjected === false) {
+				if (DEVELOPMENT) {
+					console.log("Injecting content script");
+					fetch("https://localhost:8080/contentScript.bundle.js")
+						.then(response => response.text())
+						.then((value) => {
+							//console.log(value);
+							chrome.tabs.executeScript(tabId, { code: value, runAt: "document_end" }, () => console.log("Content script injected!"));
+
+						});
+				}
+				else {
+					console.log("Injecting content script");
+					chrome.tabs.executeScript(tabId, { file: "contentScript.bundle.min.js", runAt: "document_end" }, () => console.log("Content script injected!"));
+				}
+			}
+		});
 }
 
 
 chrome.runtime.onMessage.addListener(onMessage);
 
 function onTabUpdated(tabId, changeInfo, tab) {
-	const regex = /http:\/\/www\.24ur.com/;
-	if (regex.test(tab.url) && changeInfo.status === "complete") {
-		if (DEVELOPMENT) {
-			console.log("Injecting content script");
-			fetch("https://localhost:8080/contentScript.bundle.js")
-				.then(response => response.text())
-				.then((value) => {
-					//console.log(value);
-					chrome.tabs.executeScript(tabId, { code: value, runAt: "document_end" }, () => console.log("Content script injected!"));
+	const regex = /https:\/\/github\.com\/robertsi\/vscode-chrome-extension-starter/;
+	//const regex = /http:\/\/www\.24ur\.com/;
 
-				});
-		}
-		else {
-			console.log("Injecting content script");
-			chrome.tabs.executeScript(tabId, { file: "contentScript.bundle.min.js", runAt: "document_end" }, () => console.log("Content script injected!"));
-		}
+	if (regex.test(tab.url) && changeInfo.status === "complete") {
+		injectScript(tabId);
 	}
-	console.log("tabId:" + tabId + "changeInfo: " + changeInfo.status + "tab.url=" + tab.url);
+	console.log("tabId:" + tabId + " changeInfo: " + changeInfo.status + " tab.url=" + tab.url + " tab.status=" + tab.status);
 }
 
 chrome.tabs.onUpdated.addListener(onTabUpdated);
+
+require('./background/contextMenu');
 
 if (DEVELOPMENT) {
 	if (module.hot) {
 		//
 		module.hot.dispose(() => {
+			console.log("Dispose background.js called");
 			chrome.runtime.onMessage.removeListener(onMessage);
 			chrome.tabs.onUpdated.removeListener(onTabUpdated);
 		}); //we need to remove side effects
 		module.hot.accept();
 	}
 }
+
+

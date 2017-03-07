@@ -12,7 +12,8 @@
     "build:clean": "rimraf dist",
     "build": "cross-env NODE_ENV=production webpack",
     "start": "cross-env NODE_ENV=production node prod-server.js",
-    "dev": "cross-env NODE_ENV=development node dev-server.js",
+    "predev": "npm run build:clean",
+    "dev": "cross-env NODE_ENV=development webpack && cross-env NODE_ENV=development node dev-server.js",
     "prewatch": "npm run build:clean",
     "watch": "cross-env NODE_ENV=development webpack -w",
     "test": "echo \"Error: no test specified\" && exit 1"

@@ -7,14 +7,14 @@ var compiler = webpack(config);
 var server = new WebpackDevServer(compiler, {
 	hot: true,
 	https: true,
-	inline: true,
+	inline: false,
 	filename: config.output.filename,
 	publicPath: config.output.publicPath,
 	stats: {
 		colors: true
 	},
 	contentBase: "dist",
-	historyApiFallback: true,
+	historyApiFallback: false,
 	watchOptions: {
 		aggregateTimeout: 300,
 		poll: 1000
